@@ -1,0 +1,37 @@
+name: LocationBasedAutoRank
+main: net.owlbox.sirmud.LocationBasedAutoRank.LocationBasedAutoRank
+version: 0.0.1
+author: Ebben Feagan <ebben.feagan@gmail.com>
+database: false
+depend: [PermissionsEx]
+
+permissions:
+   LocationBasedAutoRank.*:
+      default: op
+      children:
+         LocationBasedAutoRank.set: true
+         LocationBasedAutoRank.remove: true
+         LocationBasedAutoRank.list: true
+   LocationBasedAutoRank.set:
+      default: op
+   LocationBasedAutoRank.remove:
+      default: op
+   LocationBasedAutoRank.list:
+      default: op
+      
+commands:
+   setrankloc:
+      description: Allows you to define an area that changes the rank of a Player.
+      usage: /setrankloc RankFrom RankTo LocationName
+      permission: LocationBasedAutoRank.set
+      permission-message: You are not able to set AutoRank locations.
+   remrankloc:
+      description: Removes a previously defined location.
+      usage: /remrankloc LocationName
+      permission: LocationBasedAutoRank.remove
+      permission-message: You are not able to remove AutoRank locations.
+   listrankloc:
+      description: Lists previously defined locations.
+      usage: /listrankloc
+      permission: LocationBasedAutoRank.list
+      permission-message: You are not able to list AutoRank locations.
