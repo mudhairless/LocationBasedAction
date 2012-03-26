@@ -1,13 +1,16 @@
 package net.owlbox.sirmud.LocationBasedActions;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.Configuration;
 import org.bukkit.entity.Player;
-import org.bukkit.ChatColor;
+
 import ru.tehkode.permissions.PermissionGroup;
 
 public class LBAR_rankloc implements CommandExecutor {
@@ -38,23 +41,23 @@ public class LBAR_rankloc implements CommandExecutor {
 									+ " attempted to create a AutoRank for nonexistant group(s): "
 									+ targs[0] + " or " + targs[1]);
 					pl.sendMessage(ChatColor.RED
-							+ "One or more of the specified groups do not exist.");
+							+ "One or more of the specified groups do not exist. "
+							+ Integer.toString(check1));
 				}
 			}
 
 			LocationR locr = new LocationR(args[0], args[1], pl.getLocation());
 			if (plugin.locs.containsKey(locr.rankfrom)) {
-				LocationR[] loc = plugin.locs.get(locr.rankfrom);
-				loc[loc.length] = locr;
-
+				plugin.locs.get(locr.rankfrom).add(locr);
 			} else {
-				LocationR[] tvalue = { locr };
-
-				plugin.locs.put(locr.rankfrom, tvalue);
+				List<LocationR> t = new ArrayList<LocationR>();
+				t.add(locr);
+				plugin.locs.put(locr.rankfrom, t);
 			}
 			plugin.loc_names.add(args[2]);
 			plugin.getConfig().set("locations", plugin.loc_names);
 
+			plugin.getConfig().set(args[2] + ".type", "rank");
 			plugin.getConfig().set(args[2] + ".from", locr.rankfrom);
 			plugin.getConfig().set(args[2] + ".to", locr.rankto);
 			plugin.getConfig().set(args[2] + ".x", (int) locr.loc.getX());

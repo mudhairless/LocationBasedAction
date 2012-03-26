@@ -1,5 +1,6 @@
 package net.owlbox.sirmud.LocationBasedActions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -16,13 +17,13 @@ public class LocationBasedActions extends JavaPlugin {
 	public Logger log;
 	private LBAR_rankloc SRLexecutor;
 	public PermissionManager pex;
-	public HashMap<String, LocationR[]> locs;
+	public HashMap<String, List<LocationR>> locs;
 	public List<String> loc_names;
 
 	@Override
 	public void onEnable() {
 		log = this.getLogger();
-		locs = new HashMap<String, LocationR[]>();
+		locs = new HashMap<String, List<LocationR>>();
 		if (!getConfig().contains("config")) {
 			getConfig().options().copyDefaults(true);
 			this.saveDefaultConfig();
@@ -51,10 +52,10 @@ public class LocationBasedActions extends JavaPlugin {
 			tloc.loc.setZ(getConfig().getInt(name + ".z"));
 
 			if (locs.containsKey(tloc.rankfrom)) {
-				LocationR[] t = locs.get(tloc.rankfrom);
-				t[t.length] = tloc;
+				locs.get(tloc.rankfrom).add(tloc);
 			} else {
-				LocationR[] t = { tloc };
+				List<LocationR> t = new ArrayList<LocationR>();
+				t.add(tloc);
 				locs.put(tloc.rankfrom, t);
 			}
 		}
