@@ -10,9 +10,4 @@ Small plugin for Bukkit that performs certain actions based on a player's locati
 
 ## Commands ##
 
- * /setrankloc groupfrom groupto locationname
-  * sets a new location 
- * /remrankloc locationname
-  * removes a previously defined location 
- * /listrankloc
-  * lists all rank locations
+See Wiki for full list of Commands and Permissions.
