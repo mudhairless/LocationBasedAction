@@ -26,12 +26,12 @@ public class LocationR implements ConfigurationSerializable {
 		ConfigurationSerialization.registerClass(LocationR.class);
 	}
 	
-	@SuppressWarnings("unchecked")
 	public LocationR( Map<String,Object> in ) {
 		HashMap<String, Object> x = (HashMap<String,Object>)in;
 		rankfrom = (String) x.get("from");
 		rankto = (String) x.get("to");
-		loc = (TinyLocation.deserialize((Map<String,Object>)x.get("loc"))).toLocation();
+		Map<String,Object> map = (Map<String, Object>) x.get("loc");
+		loc = (TinyLocation.deserialize(map)).toLocation();
 		
 	}
 

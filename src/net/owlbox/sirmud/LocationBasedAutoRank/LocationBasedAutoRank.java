@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.bukkit.Bukkit;
+import org.bukkit.Location;
 import org.bukkit.plugin.java.JavaPlugin;
 import ru.tehkode.permissions.PermissionManager;
 import ru.tehkode.permissions.bukkit.PermissionsEx;
@@ -37,8 +39,13 @@ public class LocationBasedAutoRank extends JavaPlugin {
 		log.log(Level.FINE, "LocationBasedAutoRank Listener event registered.");
 		
 		for(String name : loc_names) {
-			log.info("Loading location: " + name);
-			LocationR tloc = (LocationR) getConfig().get(name);
+			
+			log.fine("Loading location: " + name);
+			LocationR tloc = new LocationR(getConfig().getString(name+".from"), getConfig().getString(name+".to"), new Location(Bukkit.getWorld("world"),0,0,0));
+			tloc.loc.setX(getConfig().getInt(name+".x"));
+			tloc.loc.setY(getConfig().getInt(name+".y"));
+			tloc.loc.setZ(getConfig().getInt(name+".z"));
+			
 			if(locs.containsKey(tloc.rankfrom)) {
 				LocationR[] t = locs.get(tloc.rankfrom);
 				t[t.length] = tloc;

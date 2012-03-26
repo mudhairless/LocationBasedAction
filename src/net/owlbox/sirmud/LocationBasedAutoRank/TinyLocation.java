@@ -30,9 +30,9 @@ public class TinyLocation implements ConfigurationSerializable {
  
     public TinyLocation(Location location) {
         this.world = location.getWorld().getName();
-        this.x = location.getX();
-        this.y = location.getY();
-        this.z = location.getZ();
+        this.x = (int)location.getX();
+        this.y = (int)location.getY();
+        this.z = (int)location.getZ();
     }
     
     public TinyLocation(ConfigurationSection map) {
