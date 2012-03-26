@@ -1,0 +1,7 @@
+config:
+  autorank:
+    announce-change: false
+
+strings:
+  rankchange: You have become a %rank! Congratulations!
+  rankchange-server: Everyone welcome our newest %rank, %player!
