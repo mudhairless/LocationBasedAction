@@ -1,6 +1,6 @@
 name: LocationBasedActions
 main: net.owlbox.sirmud.LocationBasedActions.LocationBasedActions
-version: 0.0.2
+version: 1.0.0
 author: Ebben Feagan <ebben.feagan@gmail.com>
 database: false
 depend: [PermissionsEx]
@@ -12,11 +12,20 @@ permissions:
          LocationBasedActions.AutoRank.set: true
          LocationBasedActions.AutoRank.remove: true
          LocationBasedActions.AutoRank.list: true
+         LocationBasedActions.AutoItem.set: true
+         LocationBasedActions.AutoItem.remove: true
+         LocationBasedActions.AutoItem.list: true
    LocationBasedActions.AutoRank.set:
       default: op
    LocationBasedActions.AutoRank.remove:
       default: op
    LocationBasedActions.AutoRank.list:
+      default: op
+   LocationBasedActions.AutoItem.set:
+      default: op
+   LocationBasedActions.AutoItem.remove:
+      default: op
+   LocationBasedActions.AutoItem.list:
       default: op
       
 commands:
@@ -35,3 +44,18 @@ commands:
       usage: /listrankloc
       permission: LocationBasedActions.AutoRank.list
       permission-message: You are not able to list AutoRank locations.
+   setitemloc:
+      description: Allows you to define an area that gives x items to Player
+      usage: /setitemloc group item item_amount LocationName
+      permission: LocationBasedActions.AutoItem.set
+      permission-message: You are not able to set AutoItem locations.
+   remitemloc:
+      description: Removes a previously defined location.
+      usage: /remitemloc LocationName
+      permission: LocationBasedActions.AutoItem.remove
+      permission-message: You are not able to remove AutoItem locations.
+   listitemloc:
+      description: Lists previously defined locations.
+      usage: /listitemloc
+      permission: LocationBasedActions.AutoItem.list
+      permission-message: You are not able to list AutoItem locations.
