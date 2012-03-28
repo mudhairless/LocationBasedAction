@@ -1,3 +1,18 @@
+/*This file is part of LocationBasedActions.
+
+    LocationBasedActions is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    LocationBasedActions is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with LocationBasedActions.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package net.owlbox.mud.LocationBasedActions;
 
 import java.util.ArrayList;
@@ -76,9 +91,9 @@ public class LocationBasedActions extends JavaPlugin {
 						"location." + name + ".from"), getConfig().getString(
 						"location." + name + ".to"), new Location(
 						Bukkit.getWorld("world"), 0, 0, 0));
-				tloc.loc.setX(getConfig().getInt("location." + name + ".x"));
-				tloc.loc.setY(getConfig().getInt("location." + name + ".y"));
-				tloc.loc.setZ(getConfig().getInt("location." + name + ".z"));
+				tloc.setX(getConfig().getInt("location." + name + ".x"));
+				tloc.setY(getConfig().getInt("location." + name + ".y"));
+				tloc.setZ(getConfig().getInt("location." + name + ".z"));
 				tloc.name = name;
 
 				if (rank_locs.containsKey(tloc.rankfrom)) {
@@ -96,9 +111,9 @@ public class LocationBasedActions extends JavaPlugin {
 							"location." + name + ".item"), getConfig().getInt(
 							"location." + name + ".itemamt"), new Location(
 							Bukkit.getWorld("world"), 0, 0, 0));
-					tloc.loc.setX(getConfig().getInt("location." + name + ".x"));
-					tloc.loc.setY(getConfig().getInt("location." + name + ".y"));
-					tloc.loc.setZ(getConfig().getInt("location." + name + ".z"));
+					tloc.setX(getConfig().getInt("location." + name + ".x"));
+					tloc.setY(getConfig().getInt("location." + name + ".y"));
+					tloc.setZ(getConfig().getInt("location." + name + ".z"));
 					tloc.name = name;
 
 					if (item_locs.containsKey(tloc.rankfrom)) {

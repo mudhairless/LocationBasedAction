@@ -1,3 +1,18 @@
+/*This file is part of LocationBasedActions.
+
+    LocationBasedActions is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    LocationBasedActions is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with LocationBasedActions.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package net.owlbox.mud.LocationBasedActions;
 
 import java.util.ArrayList;
@@ -58,18 +73,14 @@ public class LBAR_itemloc implements CommandExecutor {
 			plugin.getConfig().set("location." + args[3] + ".item", locr.item);
 			plugin.getConfig().set("location." + args[3] + ".itemamt",
 					locr.itemamt);
-			plugin.getConfig().set("location." + args[3] + ".x",
-					(int) locr.loc.getX());
-			plugin.getConfig().set("location." + args[3] + ".y",
-					(int) locr.loc.getY());
-			plugin.getConfig().set("location." + args[3] + ".z",
-					(int) locr.loc.getZ());
+			plugin.getConfig().set("location." + args[3] + ".x", locr.getX());
+			plugin.getConfig().set("location." + args[3] + ".y", locr.getY());
+			plugin.getConfig().set("location." + args[3] + ".z", locr.getZ());
 
 			String newloc = "New location set for AutoItem: X: %x Y: %y Z: %z For Group: %f Named: %name Giving %num of %item";
-			String tempstr = newloc.replace("%x",
-					Double.toString(locr.loc.getX()));
-			tempstr = tempstr.replace("%y", Double.toString(locr.loc.getY()));
-			tempstr = tempstr.replace("%z", Double.toString(locr.loc.getZ()));
+			String tempstr = newloc.replace("%x", Double.toString(locr.getX()));
+			tempstr = tempstr.replace("%y", Integer.toString(locr.getY()));
+			tempstr = tempstr.replace("%z", Integer.toString(locr.getZ()));
 			tempstr = tempstr.replace("%f", locr.rankfrom);
 			tempstr = tempstr.replace("%name", args[3]);
 			tempstr = tempstr.replace("%num", Integer.toString(locr.itemamt));

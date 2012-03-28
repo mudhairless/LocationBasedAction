@@ -1,3 +1,18 @@
+/*This file is part of LocationBasedActions.
+
+    LocationBasedActions is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    LocationBasedActions is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with LocationBasedActions.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package net.owlbox.mud.LocationBasedActions;
 
 import java.util.List;
@@ -42,10 +57,10 @@ public class LocationListener implements Listener {
 		for (String pg : pgnames) {
 			if (plugin.item_locs.containsKey(pg)) {
 				// We have location(s) defined for this group
-				Location to = new TinyLocation(event.getTo()).toLocation();
+				Location to = event.getTo();
 
 				for (LocationR locr : plugin.item_locs.get(pg)) {
-					if (locr.loc.equals(to)) {
+					if (locr.Equals(to)) {
 						ret = true;
 						// Moving into a location we've specified.
 						if (!locr.recent_items.contains(pl.getName())) {
@@ -95,10 +110,10 @@ public class LocationListener implements Listener {
 		for (String pg : pgnames) {
 			if (plugin.rank_locs.containsKey(pg)) {
 				// We have location(s) defined for this group
-				Location to = new TinyLocation(event.getTo()).toLocation();
+				Location to = event.getTo();
 
 				for (LocationR locr : plugin.rank_locs.get(pg)) {
-					if (locr.loc.equals(to)) {
+					if (locr.Equals(to)) {
 						ret = true;
 						// Moving into a location we've specified.
 						PermissionGroup group = plugin.pex

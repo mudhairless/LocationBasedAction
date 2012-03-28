@@ -1,3 +1,18 @@
+/*This file is part of LocationBasedActions.
+
+    LocationBasedActions is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    LocationBasedActions is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with LocationBasedActions.  If not, see <http://www.gnu.org/licenses/>.
+ */
 package net.owlbox.mud.LocationBasedActions;
 
 import java.util.ArrayList;
@@ -53,18 +68,15 @@ public class LBAR_rankloc implements CommandExecutor {
 			plugin.getConfig().set("location." + args[2] + ".from",
 					locr.rankfrom);
 			plugin.getConfig().set("location." + args[2] + ".to", locr.rankto);
-			plugin.getConfig().set("location." + args[2] + ".x",
-					(int) locr.loc.getX());
-			plugin.getConfig().set("location." + args[2] + ".y",
-					(int) locr.loc.getY());
-			plugin.getConfig().set("location." + args[2] + ".z",
-					(int) locr.loc.getZ());
+			plugin.getConfig().set("location." + args[2] + ".x", locr.getX());
+			plugin.getConfig().set("location." + args[2] + ".y", locr.getY());
+			plugin.getConfig().set("location." + args[2] + ".z", locr.getZ());
 
 			String newloc = "New location set for AutoRank: X: %x Y: %y Z: %z From: %f To: %t Named: %n";
-			String tempstr = newloc.replace("%x",
-					Double.toString(locr.loc.getX()));
-			tempstr = tempstr.replace("%y", Double.toString(locr.loc.getY()));
-			tempstr = tempstr.replace("%z", Double.toString(locr.loc.getZ()));
+			String tempstr = newloc
+					.replace("%x", Integer.toString(locr.getX()));
+			tempstr = tempstr.replace("%y", Integer.toString(locr.getY()));
+			tempstr = tempstr.replace("%z", Integer.toString(locr.getZ()));
 			tempstr = tempstr.replace("%f", locr.rankfrom);
 			tempstr = tempstr.replace("%t", locr.rankto);
 			tempstr = tempstr.replace("%n", args[2]);
