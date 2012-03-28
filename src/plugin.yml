@@ -1,5 +1,5 @@
 name: LocationBasedActions
-main: net.owlbox.sirmud.LocationBasedActions.LocationBasedActions
+main: net.owlbox.mud.LocationBasedActions.LocationBasedActions
 version: 1.0.0
 author: Ebben Feagan <ebben.feagan@gmail.com>
 database: false
