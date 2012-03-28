@@ -1,4 +1,4 @@
-package net.owlbox.sirmud.LocationBasedActions;
+package net.owlbox.mud.LocationBasedActions;
 
 import java.util.ArrayList;
 import java.util.List;
