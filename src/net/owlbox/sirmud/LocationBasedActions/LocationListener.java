@@ -64,6 +64,7 @@ public class LocationListener implements Listener {
 							pl.getInventory().addItem(
 									new ItemStack(locr.item, locr.itemamt));
 							locr.recent_items.add(pl.getName());
+                                                        return; //no need to check all, don't set mult in one spot.
 						}
 
 					}
@@ -132,6 +133,7 @@ public class LocationListener implements Listener {
 										ChatColor.GOLD + locr.rankto
 												+ ChatColor.WHITE);
 								Bukkit.broadcastMessage(announcestr);
+                                                                return true; //Stop processing now.
 							}
 						} else {
 							pl.sendMessage(ChatColor.RED
