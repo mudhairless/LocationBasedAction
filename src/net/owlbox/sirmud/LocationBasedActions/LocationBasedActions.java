@@ -65,6 +65,8 @@ public class LocationBasedActions extends JavaPlugin {
 		item_locs.clear();
 
 		loc_names = getConfig().getStringList("location_names");
+		if( loc_names == null )
+			return; //No locations to load.
 
 		for (String name : loc_names) {
 
