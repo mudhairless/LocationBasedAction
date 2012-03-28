@@ -80,12 +80,21 @@ public class LocationBasedActions extends JavaPlugin {
 		item_locs.clear();
 
 		loc_names = getConfig().getStringList("location_names");
+		if (loc_names == null)
+			return;
 
 		for (String name : loc_names) {
 
 			log.fine("Loading location: " + name);
 			String loc_type = getConfig().getString(
 					"location." + name + ".type");
+			if (loc_type == null) {
+				log.severe("Something went wrong, the location specified '"
+						+ name
+						+ "' is corrupted (Location in list but not found in file.) Remove  line '- "
+						+ name + "' from config.yml under location_names");
+				break;
+			}
 			if (loc_type.equalsIgnoreCase("rank")) { // rank loader
 				LocationR tloc = new LocationR(getConfig().getString(
 						"location." + name + ".from"), getConfig().getString(

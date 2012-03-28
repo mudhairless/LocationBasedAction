@@ -1,6 +1,6 @@
 name: LocationBasedActions
 main: net.owlbox.mud.LocationBasedActions.LocationBasedActions
-version: 1.0.0
+version: 1.0.2
 author: Ebben Feagan <ebben.feagan@gmail.com>
 database: false
 depend: [PermissionsEx]
