@@ -78,10 +78,8 @@ public class LBAR_itemloc implements CommandExecutor {
 			plugin.getConfig().set("location." + args[3] + ".y", locr.getY());
 			plugin.getConfig().set("location." + args[3] + ".z", locr.getZ());
 
-			final String newloc = "New location set for AutoItem: X: %x Y: %y Z: %z For Group: %f Named: %name Giving %num of %item";
-			String tempstr = newloc.replace("%x", Double.toString(locr.getX()));
-			tempstr = tempstr.replace("%y", Integer.toString(locr.getY()));
-			tempstr = tempstr.replace("%z", Integer.toString(locr.getZ()));
+			final String newloc = "New location set for AutoItem: Location: %loc For Group: %f Named: %name Giving %num of %item";
+			String tempstr = newloc.replace("%loc", locr.toString());
 			tempstr = tempstr.replace("%f", locr.rankfrom);
 			tempstr = tempstr.replace("%name", args[3]);
 			tempstr = tempstr.replace("%num", Integer.toString(locr.itemamt));
