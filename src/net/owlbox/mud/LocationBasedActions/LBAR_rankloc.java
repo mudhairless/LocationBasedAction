@@ -30,20 +30,20 @@ import ru.tehkode.permissions.PermissionGroup;
 
 public class LBAR_rankloc implements CommandExecutor {
 
-	private LocationBasedActions plugin;
+	private final LocationBasedActions plugin;
 
-	public LBAR_rankloc(LocationBasedActions myPlugin) {
-		this.plugin = myPlugin;
+	public LBAR_rankloc(final LocationBasedActions myPlugin) {
+		plugin = myPlugin;
 	}
 
-	public void setrankloc(Player pl, String[] args) {
+	public void setrankloc(final Player pl, final String[] args) {
 		if (args.length == 3) {
-			String[] targs = { args[0], args[1] };
+			final String[] targs = { args[0], args[1] };
 
-			PermissionGroup[] grps = plugin.pex.getGroups();
+			final PermissionGroup[] grps = plugin.pex.getGroups();
 			// Check for proper group names.
-			for (PermissionGroup grp : grps) {
-				for (String check : targs) {
+			for (final PermissionGroup grp : grps) {
+				for (final String check : targs) {
 					if (!grp.getName().equals(check)) {
 						plugin.log.fine("Error verifing group: " + check);
 					}
@@ -52,11 +52,12 @@ public class LBAR_rankloc implements CommandExecutor {
 
 			}
 
-			LocationR locr = new LocationR(args[0], args[1], pl.getLocation());
+			final LocationR locr = new LocationR(args[0], args[1],
+					pl.getLocation());
 			if (plugin.rank_locs.containsKey(locr.rankfrom)) {
 				plugin.rank_locs.get(locr.rankfrom).add(locr);
 			} else {
-				List<LocationR> t = new ArrayList<LocationR>();
+				final List<LocationR> t = new ArrayList<LocationR>();
 				t.add(locr);
 				plugin.rank_locs.put(locr.rankfrom, t);
 			}
@@ -72,7 +73,7 @@ public class LBAR_rankloc implements CommandExecutor {
 			plugin.getConfig().set("location." + args[2] + ".y", locr.getY());
 			plugin.getConfig().set("location." + args[2] + ".z", locr.getZ());
 
-			String newloc = "New location set for AutoRank: X: %x Y: %y Z: %z From: %f To: %t Named: %n";
+			final String newloc = "New location set for AutoRank: X: %x Y: %y Z: %z From: %f To: %t Named: %n";
 			String tempstr = newloc
 					.replace("%x", Integer.toString(locr.getX()));
 			tempstr = tempstr.replace("%y", Integer.toString(locr.getY()));
@@ -86,12 +87,13 @@ public class LBAR_rankloc implements CommandExecutor {
 			pl.sendMessage(ChatColor.GREEN + "Location " + args[2] + " saved!");
 
 			return;
-		} else
+		} else {
 			pl.sendMessage("Invalid number of arguments for command. Should be /setrankloc RankFrom Rankto LocationName");
+		}
 
 	}
 
-	public void remrankloc(Player pl, String[] args) {
+	public void remrankloc(final Player pl, final String[] args) {
 
 		if (args.length != 1) {
 			pl.sendMessage("Invalid number of arguments for command. Should be /remrankloc LocationName");
@@ -101,7 +103,7 @@ public class LBAR_rankloc implements CommandExecutor {
 		plugin.loc_names.remove(args[0]);
 		plugin.getConfig().set("location_names", plugin.loc_names);
 
-		Configuration conf = plugin.getConfig();
+		final Configuration conf = plugin.getConfig();
 		if (conf.contains("location." + args[0])) {
 			conf.set("location." + args[0], null);
 			plugin.saveConfig();
@@ -121,11 +123,11 @@ public class LBAR_rankloc implements CommandExecutor {
 		}
 	}
 
-	public void listrankloc(Player pl) {
+	public void listrankloc(final Player pl) {
 
 		String tempstr = "AutoRank Locations:";
-		for (List<LocationR> n : plugin.rank_locs.values()) {
-			for (LocationR x : n) {
+		for (final List<LocationR> n : plugin.rank_locs.values()) {
+			for (final LocationR x : n) {
 				tempstr = tempstr + " " + x.name;
 			}
 		}
@@ -133,10 +135,10 @@ public class LBAR_rankloc implements CommandExecutor {
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command,
-			String label, String[] args) {
+	public boolean onCommand(final CommandSender sender, final Command command,
+			final String label, final String[] args) {
 
-		Player pl = (Player) sender;
+		final Player pl = (Player) sender;
 
 		if (command.getName().equalsIgnoreCase("setrankloc")) {
 			setrankloc(pl, args);

@@ -11,7 +11,7 @@
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with LocationBasedActions.  If not, see <http://www.gnu.org/licenses/>.
+    along with LocationBasedActions.  If not, see <http://www.gnu.org/licenses/>.    
  */
 package net.owlbox.mud.LocationBasedActions;
 
@@ -33,29 +33,31 @@ public class LocationR {
 	private int y;
 	private int z;
 
-	public LocationR(String from, String to, Location l) { // Rank Constructor
-		this.type = "rank";
-		this.rankfrom = from;
-		this.rankto = to;
-		this.x = (int) l.getX();
-		this.y = (int) l.getY();
-		this.z = (int) l.getZ();
+	public LocationR(final String from, final String to, final Location l) { // Rank
+																				// Constructor
+		type = "rank";
+		rankfrom = from;
+		rankto = to;
+		x = (int) l.getX();
+		y = (int) l.getY();
+		z = (int) l.getZ();
 
 	}
 
-	public LocationR(String from, int item, int itemamt, Location l) { // Item
-																		// Constructor
-		this.type = "item";
-		this.rankfrom = from;
+	public LocationR(final String from, final int item, final int itemamt,
+			final Location l) { // Item
+		// Constructor
+		type = "item";
+		rankfrom = from;
 		this.item = item;
 		this.itemamt = itemamt;
-		this.recent_items = new ArrayList<String>();
-		this.x = (int) l.getX();
-		this.y = (int) l.getY();
-		this.z = (int) l.getZ();
+		recent_items = new ArrayList<String>();
+		x = (int) l.getX();
+		y = (int) l.getY();
+		z = (int) l.getZ();
 	}
 
-	public Boolean Equals(Location rhs) {
+	public Boolean Equals(final Location rhs) {
 
 		if (x == (int) rhs.getX() && y == (int) rhs.getY()
 				&& z == (int) rhs.getZ())
@@ -64,15 +66,15 @@ public class LocationR {
 		return false;
 	}
 
-	public void setX(int rhsx) {
+	public void setX(final int rhsx) {
 		x = rhsx;
 	}
 
-	public void setY(int rhsy) {
+	public void setY(final int rhsy) {
 		y = rhsy;
 	}
 
-	public void setZ(int rhsz) {
+	public void setZ(final int rhsz) {
 		z = rhsz;
 	}
 

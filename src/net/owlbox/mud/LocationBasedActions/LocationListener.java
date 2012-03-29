@@ -31,14 +31,14 @@ import ru.tehkode.permissions.PermissionUser;
 
 public class LocationListener implements Listener {
 
-	private LocationBasedActions plugin;
+	private final LocationBasedActions plugin;
 
-	public LocationListener(LocationBasedActions plugin) {
+	public LocationListener(final LocationBasedActions plugin) {
 		this.plugin = plugin;
 	}
 
 	@EventHandler
-	public void onPlayerMove(PlayerMoveEvent event) {
+	public void onPlayerMove(final PlayerMoveEvent event) {
 		if (processRank(event))
 			return;
 
@@ -48,30 +48,30 @@ public class LocationListener implements Listener {
 			return;
 	}
 
-	private Boolean processItem(PlayerMoveEvent event) {
+	private Boolean processItem(final PlayerMoveEvent event) {
 		Boolean ret = false;
-		Player pl = event.getPlayer();
-		PermissionUser pex_pl = plugin.pex.getUser(pl);
-		String[] pgnames = pex_pl.getGroupsNames();
+		final Player pl = event.getPlayer();
+		final PermissionUser pex_pl = plugin.pex.getUser(pl);
+		final String[] pgnames = pex_pl.getGroupsNames();
 
-		for (String pg : pgnames) {
+		for (final String pg : pgnames) {
 			if (plugin.item_locs.containsKey(pg)) {
 				// We have location(s) defined for this group
-				Location to = event.getTo();
+				final Location to = event.getTo();
 
-				for (LocationR locr : plugin.item_locs.get(pg)) {
+				for (final LocationR locr : plugin.item_locs.get(pg)) {
 					if (locr.Equals(to)) {
 						ret = true;
 						// Moving into a location we've specified.
 						if (!locr.recent_items.contains(pl.getName())) {
 
-							String itemGiveconf = plugin.getConfig().getString(
-									"strings.itemgive",
-									"You have been given %item, nice!");
+							final String itemGiveconf = plugin.getConfig()
+									.getString("strings.itemgive",
+											"You have been given %item, nice!");
 
-							String itemGive = itemGiveconf.replace("%item",
-									new ItemStack(locr.item, locr.itemamt)
-											.toString());
+							final String itemGive = itemGiveconf.replace(
+									"%item", new ItemStack(locr.item,
+											locr.itemamt).toString());
 							pl.sendMessage(ChatColor.GREEN + itemGive);
 							plugin.log.info(pl.getName() + " was given "
 									+ Integer.toString(locr.itemamt) + " of "
@@ -89,42 +89,44 @@ public class LocationListener implements Listener {
 		return ret;
 	}
 
-	private void removeRecent(String pname) {
-		for (List<LocationR> n : plugin.item_locs.values()) {
-			for (LocationR m : n) {
-				if (m.recent_items.contains(pname))
+	private void removeRecent(final String pname) {
+		for (final List<LocationR> n : plugin.item_locs.values()) {
+			for (final LocationR m : n) {
+				if (m.recent_items.contains(pname)) {
 					m.recent_items.remove(pname);
-				if (m.recent_items.size() > 10)
+				}
+				if (m.recent_items.size() > 10) {
 					m.recent_items.remove(0);
+				}
 			}
 		}
 
 	}
 
-	private Boolean processRank(PlayerMoveEvent event) {
+	private Boolean processRank(final PlayerMoveEvent event) {
 		Boolean ret = false;
-		Player pl = event.getPlayer();
-		PermissionUser pex_pl = plugin.pex.getUser(pl);
-		String[] pgnames = pex_pl.getGroupsNames();
+		final Player pl = event.getPlayer();
+		final PermissionUser pex_pl = plugin.pex.getUser(pl);
+		final String[] pgnames = pex_pl.getGroupsNames();
 
-		for (String pg : pgnames) {
+		for (final String pg : pgnames) {
 			if (plugin.rank_locs.containsKey(pg)) {
 				// We have location(s) defined for this group
-				Location to = event.getTo();
+				final Location to = event.getTo();
 
-				for (LocationR locr : plugin.rank_locs.get(pg)) {
+				for (final LocationR locr : plugin.rank_locs.get(pg)) {
 					if (locr.Equals(to)) {
 						ret = true;
 						// Moving into a location we've specified.
-						PermissionGroup group = plugin.pex
+						final PermissionGroup group = plugin.pex
 								.getGroup(locr.rankto);
 						if (group != null) {
-							String rankUpconf = plugin
+							final String rankUpconf = plugin
 									.getConfig()
 									.getString("strings.rankchange",
 											"You have become a %rank! Congratulations!");
 							pex_pl.setGroups(new PermissionGroup[] { group });
-							String rankUp = rankUpconf.replace("%rank",
+							final String rankUp = rankUpconf.replace("%rank",
 									locr.rankto);
 							pl.sendMessage(ChatColor.GREEN + rankUp);
 							plugin.log.info(pl.getName() + " became a "

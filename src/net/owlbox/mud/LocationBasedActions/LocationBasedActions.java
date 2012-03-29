@@ -12,6 +12,10 @@
 
     You should have received a copy of the GNU General Public License
     along with LocationBasedActions.  If not, see <http://www.gnu.org/licenses/>.
+    
+    Depends on:
+    Bukkit: http://dl.bukkit.org/downloads/bukkit
+    PermissionsEx: http://webbukkit.org/jenkins/packages/PermissionsEx/
  */
 package net.owlbox.mud.LocationBasedActions;
 
@@ -39,7 +43,7 @@ public class LocationBasedActions extends JavaPlugin {
 
 	@Override
 	public void onEnable() {
-		log = this.getLogger();
+		log = getLogger();
 
 		loc_names = new ArrayList<String>();
 		rank_locs = new HashMap<String, List<LocationR>>();
@@ -47,7 +51,7 @@ public class LocationBasedActions extends JavaPlugin {
 
 		if (!getConfig().contains("config")) {
 			getConfig().options().copyDefaults(true);
-			this.saveDefaultConfig();
+			saveDefaultConfig();
 		}
 
 		pex = PermissionsEx.getPermissionManager();
@@ -61,7 +65,7 @@ public class LocationBasedActions extends JavaPlugin {
 		getCommand("remitemloc").setExecutor(AutoItemexecutor);
 		getCommand("listitemloc").setExecutor(AutoItemexecutor);
 
-		LocationListener LocListen = new LocationListener(this);
+		final LocationListener LocListen = new LocationListener(this);
 		getServer().getPluginManager().registerEvents(LocListen, this);
 
 		reloadLocations();
@@ -70,7 +74,7 @@ public class LocationBasedActions extends JavaPlugin {
 
 	@Override
 	public void onDisable() {
-		this.saveConfig();
+		saveConfig();
 	}
 
 	public void reloadLocations() {
@@ -83,10 +87,10 @@ public class LocationBasedActions extends JavaPlugin {
 		if (loc_names == null)
 			return;
 
-		for (String name : loc_names) {
+		for (final String name : loc_names) {
 
 			log.fine("Loading location: " + name);
-			String loc_type = getConfig().getString(
+			final String loc_type = getConfig().getString(
 					"location." + name + ".type");
 			if (loc_type == null) {
 				log.severe("Something went wrong, the location specified '"
@@ -96,7 +100,7 @@ public class LocationBasedActions extends JavaPlugin {
 				break;
 			}
 			if (loc_type.equalsIgnoreCase("rank")) { // rank loader
-				LocationR tloc = new LocationR(getConfig().getString(
+				final LocationR tloc = new LocationR(getConfig().getString(
 						"location." + name + ".from"), getConfig().getString(
 						"location." + name + ".to"), new Location(
 						Bukkit.getWorld("world"), 0, 0, 0));
@@ -108,14 +112,14 @@ public class LocationBasedActions extends JavaPlugin {
 				if (rank_locs.containsKey(tloc.rankfrom)) {
 					rank_locs.get(tloc.rankfrom).add(tloc);
 				} else {
-					List<LocationR> t = new ArrayList<LocationR>();
+					final List<LocationR> t = new ArrayList<LocationR>();
 					t.add(tloc);
 					rank_locs.put(tloc.rankfrom, t);
 				}
 			} else {
 				if (loc_type.equalsIgnoreCase("item")) {
 					// item loader
-					LocationR tloc = new LocationR(getConfig().getString(
+					final LocationR tloc = new LocationR(getConfig().getString(
 							"location." + name + ".from"), getConfig().getInt(
 							"location." + name + ".item"), getConfig().getInt(
 							"location." + name + ".itemamt"), new Location(
@@ -128,7 +132,7 @@ public class LocationBasedActions extends JavaPlugin {
 					if (item_locs.containsKey(tloc.rankfrom)) {
 						item_locs.get(tloc.rankfrom).add(tloc);
 					} else {
-						List<LocationR> t = new ArrayList<LocationR>();
+						final List<LocationR> t = new ArrayList<LocationR>();
 						t.add(tloc);
 						item_locs.put(tloc.rankfrom, t);
 					}

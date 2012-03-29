@@ -30,20 +30,20 @@ import ru.tehkode.permissions.PermissionGroup;
 
 public class LBAR_itemloc implements CommandExecutor {
 
-	private LocationBasedActions plugin;
+	private final LocationBasedActions plugin;
 
-	public LBAR_itemloc(LocationBasedActions myPlugin) {
-		this.plugin = myPlugin;
+	public LBAR_itemloc(final LocationBasedActions myPlugin) {
+		plugin = myPlugin;
 	}
 
-	public void setitemloc(Player pl, String[] args) {
+	public void setitemloc(final Player pl, final String[] args) {
 		if (args.length == 4) {
-			String[] targs = { args[0] };
+			final String[] targs = { args[0] };
 
-			PermissionGroup[] grps = plugin.pex.getGroups();
+			final PermissionGroup[] grps = plugin.pex.getGroups();
 			// Check for proper group names.
-			for (PermissionGroup grp : grps) {
-				for (String check : targs) {
+			for (final PermissionGroup grp : grps) {
+				for (final String check : targs) {
 					if (!grp.getName().equals(check)) {
 						plugin.log.fine("Error verifing group: " + check);
 
@@ -53,12 +53,13 @@ public class LBAR_itemloc implements CommandExecutor {
 
 			}
 
-			LocationR locr = new LocationR(args[0], Integer.parseInt(args[1]),
-					Integer.parseInt(args[2]), pl.getLocation());
+			final LocationR locr = new LocationR(args[0],
+					Integer.parseInt(args[1]), Integer.parseInt(args[2]),
+					pl.getLocation());
 			if (plugin.item_locs.containsKey(locr.rankfrom)) {
 				plugin.item_locs.get(locr.rankfrom).add(locr);
 			} else {
-				List<LocationR> t = new ArrayList<LocationR>();
+				final List<LocationR> t = new ArrayList<LocationR>();
 				t.add(locr);
 				plugin.item_locs.put(locr.rankfrom, t);
 			}
@@ -77,7 +78,7 @@ public class LBAR_itemloc implements CommandExecutor {
 			plugin.getConfig().set("location." + args[3] + ".y", locr.getY());
 			plugin.getConfig().set("location." + args[3] + ".z", locr.getZ());
 
-			String newloc = "New location set for AutoItem: X: %x Y: %y Z: %z For Group: %f Named: %name Giving %num of %item";
+			final String newloc = "New location set for AutoItem: X: %x Y: %y Z: %z For Group: %f Named: %name Giving %num of %item";
 			String tempstr = newloc.replace("%x", Double.toString(locr.getX()));
 			tempstr = tempstr.replace("%y", Integer.toString(locr.getY()));
 			tempstr = tempstr.replace("%z", Integer.toString(locr.getZ()));
@@ -91,12 +92,13 @@ public class LBAR_itemloc implements CommandExecutor {
 			pl.sendMessage(ChatColor.GREEN + "Location " + args[3] + " saved!");
 
 			return;
-		} else
+		} else {
 			pl.sendMessage("Invalid number of arguments for command. Should be /setitemloc group item item_amount LocationName");
+		}
 
 	}
 
-	public void remitemloc(Player pl, String[] args) {
+	public void remitemloc(final Player pl, final String[] args) {
 
 		if (args.length != 1) {
 			pl.sendMessage("Invalid number of arguments for command. Should be /remitemloc LocationName");
@@ -106,7 +108,7 @@ public class LBAR_itemloc implements CommandExecutor {
 		plugin.loc_names.remove(args[0]);
 		plugin.getConfig().set("location_names", plugin.loc_names);
 
-		Configuration conf = plugin.getConfig();
+		final Configuration conf = plugin.getConfig();
 		if (conf.contains("location." + args[0])) {
 			conf.set("location." + args[0], null);
 			plugin.saveConfig();
@@ -126,11 +128,11 @@ public class LBAR_itemloc implements CommandExecutor {
 		}
 	}
 
-	public void listitemloc(Player pl) {
+	public void listitemloc(final Player pl) {
 
 		String tempstr = "Autoitem Locations:";
-		for (List<LocationR> n : plugin.item_locs.values()) {
-			for (LocationR x : n) {
+		for (final List<LocationR> n : plugin.item_locs.values()) {
+			for (final LocationR x : n) {
 				tempstr = tempstr + " " + x.name;
 			}
 		}
@@ -138,10 +140,10 @@ public class LBAR_itemloc implements CommandExecutor {
 	}
 
 	@Override
-	public boolean onCommand(CommandSender sender, Command command,
-			String label, String[] args) {
+	public boolean onCommand(final CommandSender sender, final Command command,
+			final String label, final String[] args) {
 
-		Player pl = (Player) sender;
+		final Player pl = (Player) sender;
 
 		if (command.getName().equalsIgnoreCase("setitemloc")) {
 			setitemloc(pl, args);
