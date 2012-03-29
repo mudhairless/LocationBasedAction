@@ -137,7 +137,7 @@ public class LocationBasedActions extends JavaPlugin {
 						item_locs.put(tloc.rankfrom, t);
 					}
 				} else {
-					log.info("Unknown type of location in " + name);
+					log.severe("Unknown type of location in " + name);
 				}
 			}
 		}

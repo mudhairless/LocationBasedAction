@@ -130,13 +130,13 @@ public class LBAR_itemloc implements CommandExecutor {
 
 	public void listitemloc(final Player pl) {
 
-		String tempstr = "Autoitem Locations:";
+		final StringBuilder tempstr = new StringBuilder("Autoitem Locations:");
 		for (final List<LocationR> n : plugin.item_locs.values()) {
 			for (final LocationR x : n) {
-				tempstr = tempstr + " " + x.name;
+				tempstr.append(" " + x.name);
 			}
 		}
-		pl.sendMessage(tempstr);
+		pl.sendMessage(tempstr.toString());
 	}
 
 	@Override

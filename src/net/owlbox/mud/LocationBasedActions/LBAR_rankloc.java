@@ -73,11 +73,8 @@ public class LBAR_rankloc implements CommandExecutor {
 			plugin.getConfig().set("location." + args[2] + ".y", locr.getY());
 			plugin.getConfig().set("location." + args[2] + ".z", locr.getZ());
 
-			final String newloc = "New location set for AutoRank: X: %x Y: %y Z: %z From: %f To: %t Named: %n";
-			String tempstr = newloc
-					.replace("%x", Integer.toString(locr.getX()));
-			tempstr = tempstr.replace("%y", Integer.toString(locr.getY()));
-			tempstr = tempstr.replace("%z", Integer.toString(locr.getZ()));
+			final String newloc = "New location set for AutoRank: Location: %loc From: %f To: %t Named: %n";
+			String tempstr = newloc.replace("%loc", locr.toString());
 			tempstr = tempstr.replace("%f", locr.rankfrom);
 			tempstr = tempstr.replace("%t", locr.rankto);
 			tempstr = tempstr.replace("%n", args[2]);
@@ -125,13 +122,13 @@ public class LBAR_rankloc implements CommandExecutor {
 
 	public void listrankloc(final Player pl) {
 
-		String tempstr = "AutoRank Locations:";
+		final StringBuilder tempstr = new StringBuilder("AutoRank Locations:");
 		for (final List<LocationR> n : plugin.rank_locs.values()) {
 			for (final LocationR x : n) {
-				tempstr = tempstr + " " + x.name;
+				tempstr.append(" " + x.name);
 			}
 		}
-		pl.sendMessage(tempstr);
+		pl.sendMessage(tempstr.toString());
 	}
 
 	@Override

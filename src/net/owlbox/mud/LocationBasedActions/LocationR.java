@@ -89,4 +89,10 @@ public class LocationR {
 	public int getZ() {
 		return z;
 	}
+
+	@Override
+	public String toString() {
+		return "(x:" + Integer.toString(x) + ", y:" + Integer.toString(y)
+				+ ", z:" + Integer.toString(z) + ")";
+	}
 }

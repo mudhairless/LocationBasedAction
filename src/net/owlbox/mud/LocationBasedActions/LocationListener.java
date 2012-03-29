@@ -68,16 +68,14 @@ public class LocationListener implements Listener {
 							final String itemGiveconf = plugin.getConfig()
 									.getString("strings.itemgive",
 											"You have been given %item, nice!");
-
-							final String itemGive = itemGiveconf.replace(
-									"%item", new ItemStack(locr.item,
-											locr.itemamt).toString());
-							pl.sendMessage(ChatColor.GREEN + itemGive);
+							final ItemStack newitem = new ItemStack(locr.item,
+									locr.itemamt);
+							pl.sendMessage(ChatColor.GREEN
+									+ itemGiveconf.replace("%item",
+											newitem.toString()));
 							plugin.log.info(pl.getName() + " was given "
-									+ Integer.toString(locr.itemamt) + " of "
-									+ Integer.toString(locr.item));
-							pl.getInventory().addItem(
-									new ItemStack(locr.item, locr.itemamt));
+									+ newitem.toString());
+							pl.getInventory().addItem(newitem);
 							locr.recent_items.add(pl.getName());
 						}
 
@@ -126,9 +124,8 @@ public class LocationListener implements Listener {
 									.getString("strings.rankchange",
 											"You have become a %rank! Congratulations!");
 							pex_pl.setGroups(new PermissionGroup[] { group });
-							final String rankUp = rankUpconf.replace("%rank",
-									locr.rankto);
-							pl.sendMessage(ChatColor.GREEN + rankUp);
+							pl.sendMessage(ChatColor.GREEN
+									+ rankUpconf.replace("%rank", locr.rankto));
 							plugin.log.info(pl.getName() + " became a "
 									+ locr.rankto);
 							// When rank changes player name
